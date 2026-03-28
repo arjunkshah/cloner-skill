@@ -20,7 +20,7 @@ Given a target URL, the skill:
 1. Uses local tooling (`curl`/`wget` and optional local browser automation) to inspect structure, styles, assets, and behavior.
 2. Creates auditable research/spec files in `docs/research`.
 3. Dispatches focused builder agents/worktrees for sections/components.
-4. Reassembles into a high-fidelity Next.js clone (including animations/interactions) and verifies build integrity.
+4. Reassembles into a high-fidelity Next.js + Tailwind CSS clone (including animations/interactions) and verifies build integrity.
 
 Code quality policy:
 - clean, componentized, production-style code

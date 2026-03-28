@@ -12,6 +12,7 @@ When invoked, take the provided URL and perform an end-to-end local clone workfl
 
 - Use local CLI tools and code changes directly in the workspace.
 - Default to rebuilding in this project (Next.js scaffold) unless the user requests a different stack.
+- Use Tailwind CSS as the default styling approach unless the user explicitly requests another system.
 - Preserve visual structure, content, spacing, typography, and behavior as closely as practical.
 - Preserve animation behavior (timing, easing, delays, keyframes, scroll triggers) as closely as practical.
 - Prefer real extracted content/assets over invented placeholders.
@@ -59,7 +60,8 @@ Write asset inventory to:
 ### 3. Rebuild
 
 - Implement the cloned page in `src/app/page.tsx` and supporting components.
-- Add/update styles in `src/app/globals.css`.
+- Use Tailwind utility classes for most styling and layout.
+- Add/update design tokens, keyframes, and shared utilities in `src/app/globals.css`.
 - Create reusable components in `src/components/` when section complexity warrants.
 - Create TS types in `src/types/` for structured content.
 - Keep the codebase buildable at each step.
@@ -86,7 +88,7 @@ Write behavior notes to:
 - No broken imports, type errors, or non-compiling output.
 - Avoid placeholder lorem text when real content is extractable.
 - Maintain semantic HTML and reasonable accessibility attributes.
-- Keep CSS maintainable; extract repeating patterns into reusable classes/components.
+- Keep Tailwind usage maintainable; extract repeating patterns into reusable components/variants.
 - Do not output scraper-style code dumps (massive inline styles, hashed class copies, unreadable DOM mirrors).
 - Produce clean production-quality code: small components, clear names, shared tokens, and minimal duplication.
 - Animation code must be intentional and readable (centralized keyframes/utilities where possible).
