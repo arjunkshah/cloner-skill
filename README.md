@@ -10,8 +10,9 @@ This repo started from `JCodesMore/ai-website-cloner-template` and is now packag
 
 ## Skill Locations
 
+- Primary installable skill (for `npx skills add`): `skills/clone/`
 - Claude skill: `.claude/skills/clone-website/SKILL.md`
-- Generic skill: `skills/clone-website/SKILL.md`
+- Legacy generic path: `skills/clone-website/SKILL.md`
 
 ## What The Skill Does
 
@@ -28,43 +29,37 @@ Given a target URL, the skill:
 - Chrome MCP/browser automation available to your agent
 - Git
 
-## Install And Use
+## Install
 
-### Claude Code
+```bash
+npx skills add https://github.com/arjunkshah/cloner-skill
+```
 
-1. Clone this repo:
-   ```bash
-   git clone https://github.com/arjunkshah/cloner-skill.git
-   ```
-2. Either:
-   - run from this repo directly with Claude Code, or
-   - copy `.claude/skills/clone-website` into your own repo’s `.claude/skills/`
-3. Start Claude with Chrome enabled:
-   ```bash
-   claude --chrome
-   ```
-4. Invoke the skill with a URL:
-   ```
-   /clone-website https://example.com
-   ```
+Then invoke:
 
-### Codex
+```text
+$clone https://example.com
+```
 
-1. Copy the generic skill folder into your Codex skills directory:
-   ```bash
-   mkdir -p ~/.codex/skills
-   cp -R skills/clone-website ~/.codex/skills/
-   ```
-2. Start Codex in your project and ask it to clone a site, providing the target URL.
+Alternative flow:
 
-### Other Agents
+```text
+$clone
+https://example.com
+```
 
-Use `skills/clone-website/SKILL.md` as the base instruction file and adapt trigger wiring for that platform.
+## Agent Notes
+
+- `$clone` comes from `skills/clone/agents/openai.yaml`.
+- Claude slash-command usage remains supported in repos that use `.claude/skills/clone-website/`:
+  - `/clone-website https://example.com`
+- For manual installs, copy `skills/clone/` into your local skills directory.
 
 ## Repository Structure
 
 ```text
 .claude/skills/clone-website/   # Claude-native skill
+skills/clone/                   # npx-installable primary skill ($clone)
 skills/clone-website/           # Agent-agnostic skill
 src/                            # Next.js scaffold used by the clone workflow
 docs/research/                  # Extraction output/spec files
