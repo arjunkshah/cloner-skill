@@ -12,7 +12,6 @@ This repo started from `JCodesMore/ai-website-cloner-template` and is now packag
 
 - Primary installable skill (for `npx skills add`): `skills/clone/`
 - Claude skill: `.claude/skills/clone-website/SKILL.md`
-- Legacy generic path: `skills/clone-website/SKILL.md`
 
 ## What The Skill Does
 
@@ -60,7 +59,6 @@ https://example.com
 ```text
 .claude/skills/clone-website/   # Claude-native skill
 skills/clone/                   # npx-installable primary skill ($clone)
-skills/clone-website/           # Agent-agnostic skill
 src/                            # Next.js scaffold used by the clone workflow
 docs/research/                  # Extraction output/spec files
 docs/design-references/         # Screenshots/reference images
