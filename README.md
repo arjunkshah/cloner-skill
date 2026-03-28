@@ -17,7 +17,7 @@ This repo started from `JCodesMore/ai-website-cloner-template` and is now packag
 
 Given a target URL, the skill:
 
-1. Uses browser automation (Chrome MCP) to inspect structure, styles, assets, and behavior.
+1. Uses local tooling (`curl`/`wget` and optional local browser automation) to inspect structure, styles, assets, and behavior.
 2. Creates auditable research/spec files in `docs/research`.
 3. Dispatches focused builder agents/worktrees for sections/components.
 4. Reassembles into a high-fidelity Next.js clone and verifies build integrity.
@@ -25,7 +25,7 @@ Given a target URL, the skill:
 ## Prerequisites
 
 - Node.js 20+
-- Chrome MCP/browser automation available to your agent
+- Local CLI tools (`curl`, `wget`; Playwright optional for JS-heavy sites)
 - Git
 
 ## Install
