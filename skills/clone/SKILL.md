@@ -13,6 +13,7 @@ When invoked, take the provided URL and perform an end-to-end local clone workfl
 - Use local CLI tools and code changes directly in the workspace.
 - Default to rebuilding in this project (Next.js scaffold) unless the user requests a different stack.
 - Preserve visual structure, content, spacing, typography, and behavior as closely as practical.
+- Preserve animation behavior (timing, easing, delays, keyframes, scroll triggers) as closely as practical.
 - Prefer real extracted content/assets over invented placeholders.
 
 ## Input Rules
@@ -66,6 +67,8 @@ Write asset inventory to:
 ### 4. Behavior Fidelity
 
 - Recreate visible interactions (hover, transitions, responsive layout, sticky/fixed elements).
+- Recreate motion system details: durations, easings, delays, transforms, keyframes, and stagger patterns.
+- Recreate scroll-driven animations (reveal-on-scroll, parallax, sticky transitions, progress-linked effects) when present.
 - For complex JS behavior, implement pragmatic equivalents with clear comments.
 - If exact behavior cannot be replicated locally, document what differs.
 
@@ -84,6 +87,9 @@ Write behavior notes to:
 - Avoid placeholder lorem text when real content is extractable.
 - Maintain semantic HTML and reasonable accessibility attributes.
 - Keep CSS maintainable; extract repeating patterns into reusable classes/components.
+- Do not output scraper-style code dumps (massive inline styles, hashed class copies, unreadable DOM mirrors).
+- Produce clean production-quality code: small components, clear names, shared tokens, and minimal duplication.
+- Animation code must be intentional and readable (centralized keyframes/utilities where possible).
 
 ## Output Contract
 
