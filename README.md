@@ -1,108 +1,81 @@
-# AI Website Cloner Template
+# Cloner Skill
 
-A reusable template for reverse-engineering any website and rebuilding it as a pixel-perfect clone using [Claude Code](https://docs.anthropic.com/en/docs/claude-code).
+Reusable website cloning skill package for agentic coding tools.
 
-Point it at a URL, run `/clone-website`, and Claude Code will inspect the site via Chrome MCP, extract design tokens and assets, write component specs, and dispatch parallel builder agents to reconstruct every section — all in isolated git worktrees that merge automatically.
+This repo started from `JCodesMore/ai-website-cloner-template` and is now packaged so you can install/use the same cloning workflow in:
 
-## Demo
+- Claude Code
+- Codex
+- Any agent system that can load a Markdown skill file
 
-[![Watch the demo](docs/design-references/comparison.png)](https://youtu.be/O669pVZ_qr0)
+## Skill Locations
 
-> Click the image above to watch the full demo on YouTube.
+- Claude skill: `.claude/skills/clone-website/SKILL.md`
+- Generic skill: `skills/clone-website/SKILL.md`
 
-## Quick Start
+## What The Skill Does
 
-1. **Clone this repo**
-   ```bash
-   git clone https://github.com/JCodesMore/ai-website-cloner-template.git my-clone
-   cd my-clone
-   ```
-2. **Install dependencies**
-   ```bash
-   npm install
-   ```
-3. **Start Claude Code** with Chrome MCP enabled:
-   ```bash
-   claude --chrome
-   ```
-4. **Run the skill**:
-   ```
-   /clone-website <target-url>
-   ```
-5. **Customize** (optional) — after the base clone is built, modify as needed
+Given a target URL, the skill:
 
-> **Tip:** You can optionally edit `TARGET.md` before cloning to specify pages, fidelity level, and scope — but it's not required. The `/clone-website` skill will handle everything from just the URL.
+1. Uses browser automation (Chrome MCP) to inspect structure, styles, assets, and behavior.
+2. Creates auditable research/spec files in `docs/research`.
+3. Dispatches focused builder agents/worktrees for sections/components.
+4. Reassembles into a high-fidelity Next.js clone and verifies build integrity.
 
 ## Prerequisites
 
-- [Node.js](https://nodejs.org/) 20+
-- [Claude Code](https://docs.anthropic.com/en/docs/claude-code)
+- Node.js 20+
+- Chrome MCP/browser automation available to your agent
+- Git
 
-## Tech Stack
+## Install And Use
 
-- **Next.js 16** — App Router, React 19, TypeScript strict
-- **shadcn/ui** — Radix primitives + Tailwind CSS v4
-- **Tailwind CSS v4** — oklch design tokens
-- **Lucide React** — default icons (replaced by extracted SVGs during cloning)
+### Claude Code
 
-## How It Works
+1. Clone this repo:
+   ```bash
+   git clone https://github.com/arjunkshah/cloner-skill.git
+   ```
+2. Either:
+   - run from this repo directly with Claude Code, or
+   - copy `.claude/skills/clone-website` into your own repo’s `.claude/skills/`
+3. Start Claude with Chrome enabled:
+   ```bash
+   claude --chrome
+   ```
+4. Invoke the skill with a URL:
+   ```
+   /clone-website https://example.com
+   ```
 
-The `/clone-website` skill runs a multi-phase pipeline:
+### Codex
 
-1. **Reconnaissance** — screenshots, design token extraction, interaction sweep (scroll, click, hover, responsive)
-2. **Foundation** — updates fonts, colors, globals, downloads all assets
-3. **Component Specs** — writes detailed spec files (`docs/research/components/`) with exact computed CSS values, states, behaviors, and content
-4. **Parallel Build** — dispatches builder agents in git worktrees, one per section/component
-5. **Assembly & QA** — merges worktrees, wires up the page, runs visual diff against the original
+1. Copy the generic skill folder into your Codex skills directory:
+   ```bash
+   mkdir -p ~/.codex/skills
+   cp -R skills/clone-website ~/.codex/skills/
+   ```
+2. Start Codex in your project and ask it to clone a site, providing the target URL.
 
-Each builder agent receives the full component specification inline — exact `getComputedStyle()` values, interaction models, multi-state content, responsive breakpoints, and asset paths. No guessing.
+### Other Agents
 
-## Project Structure
+Use `skills/clone-website/SKILL.md` as the base instruction file and adapt trigger wiring for that platform.
 
-```
-src/
-  app/              # Next.js routes
-  components/       # React components
-    ui/             # shadcn/ui primitives
-    icons.tsx       # Extracted SVG icons
-  lib/utils.ts      # cn() utility
-  types/            # TypeScript interfaces
-  hooks/            # Custom React hooks
-public/
-  images/           # Downloaded images from target
-  videos/           # Downloaded videos from target
-  seo/              # Favicons, OG images
-docs/
-  research/         # Extraction output & component specs
-  design-references/ # Screenshots
-scripts/            # Asset download scripts
-TARGET.md           # Clone target configuration
-AGENTS.md           # Agent instructions & code style
-```
+## Repository Structure
 
-## Commands
-
-```bash
-npm run dev    # Start dev server
-npm run build  # Production build
-npm run lint   # ESLint check
+```text
+.claude/skills/clone-website/   # Claude-native skill
+skills/clone-website/           # Agent-agnostic skill
+src/                            # Next.js scaffold used by the clone workflow
+docs/research/                  # Extraction output/spec files
+docs/design-references/         # Screenshots/reference images
+scripts/                        # Asset/download helpers
+TARGET.md                       # Optional target scope/config
 ```
 
-## Configuration (Optional)
+## Source Template Attribution
 
-Edit **`TARGET.md`** before cloning if you want fine-grained control:
+Derived from:
+- https://github.com/JCodesMore/ai-website-cloner-template
 
-- **Pages** — which pages to replicate (default: home page)
-- **Fidelity** — pixel-perfect, high fidelity, or structural
-- **Scope** — what's in/out of scope
-- **Customization plans** — modifications to apply after the base clone
-
-If you skip this, `/clone-website <url>` will default to a pixel-perfect clone of the home page. 
-
-## Star History
-
-[![Star History Chart](https://api.star-history.com/svg?repos=JCodesMore/ai-website-cloner-template&type=Date)](https://star-history.com/#JCodesMore/ai-website-cloner-template&Date)
-
-## License
-
-MIT
+License remains MIT.
